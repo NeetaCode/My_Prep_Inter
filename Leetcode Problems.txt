@@ -1,0 +1,6 @@
+1.	Arrays, Strings, Hash Tables
+2.	Trees, Graphs (BFS, DFS, Dijkstra’s, A*)
+3.	Dynamic Programming
+4.	Recursion & Backtracking
+5.	Sliding Window, Two Pointers
+6. Bit Manipulation
