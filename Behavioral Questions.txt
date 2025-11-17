@@ -1,5 +1,169 @@
+========================================
 1. Tell me about a time you faced a challenge at work.
-2. Describe a situation where you had to work with a difficult team member.
+========================================
+
+-------------------------
+SOFTWARE ENGINEERING (SE)
+(Use this for SWE interviews)
+-------------------------
+
+CASE 1 — Legacy Chromatin Reconstruction + Docker
+Role: SE / Research Engineering / DevOps
+
+S — Situation
+A legacy chromatin reconstruction pipeline had stopped working because the environment and dependencies were outdated.
+
+T — Task
+I needed to get the entire model running end-to-end, fix all dependency issues, and containerize the system using only the terminal.
+
+A — Action
+• Reverse-engineered the entire codebase and mapped its workflow.  
+• Rebuilt the environment and resolved incompatible Python packages.  
+• Fixed broken modules and updated outdated API calls.  
+• Wrote a Dockerfile from scratch and created reproducible scripts.  
+• Validated outputs using test datasets.
+
+R — Result
+Successfully restored a nonfunctional research model, making it stable, portable, reproducible, and easy for other researchers to run via Docker.
+
+
+
+CASE 2 — Network Troubleshooting & Ticket Resolution
+Role: SE / Systems / Networking
+
+S — Situation
+I handled incoming network-related tickets across the organization.
+
+T — Task
+Diagnose root causes quickly and resolve them without impacting production.
+
+A — Action
+• Investigated packet flow, DNS issues, routing failures, and misconfigurations.  
+• Used traceroute, ping, Wireshark, and log analysis.  
+• Worked with sysadmin and infra teams when escalation was needed.  
+• Documented each issue to reduce repeat incidents.
+
+R — Result
+Resolved issues within SLA, improved reliability, and reduced repeat tickets through better documentation and root-cause fixes.
+
+
+
+========================================
+2. AI / ML PROJECTS
+(Use for ML Engineer / Research / AI roles)
+========================================
+
+CASE 1 — Accent Detection Using ANN, LSTM, BiLSTM
+Role: AI/ML / Deep Learning / Speech Processing
+
+S — Situation
+Assigned an end-to-end accent detection project without prior experience in audio processing.
+
+T — Task
+Build a full deep learning pipeline to classify accents with good accuracy.
+
+A — Action
+• Cleaned and preprocessed raw audio data.  
+• Extracted MFCCs, spectrograms, and normalized features.  
+• Implemented ANN, CNN, LSTM, and BiLSTM architectures.  
+• Tuned hyperparameters, activations, softmax layers, and dropout.  
+• Used Google Colab for training and experiments.
+
+R — Result
+Achieved 70–80% accuracy and delivered a complete working prototype.
+
+
+
+CASE 2 — RL-Based 3D Chromosome Reconstruction
+Role: AI/ML Research / Reinforcement Learning / Computational Biology
+
+S — Situation
+Our team wanted to explore reinforcement learning for 3D chromosome structure generation.
+
+T — Task
+Design and implement an RL-based model that learns to construct chromosome shapes matching distance constraints.
+
+A — Action
+• Studied RL fundamentals, reward shaping, and exploration strategies.  
+• Designed an RL pipeline where the agent iteratively refined the 3D structure.  
+• Implemented a reward system based on distance accuracy and structural consistency.  
+• Visualized predicted vs ground-truth structures.
+
+R — Result
+Delivered a working RL proof-of-concept demonstrating RL’s potential in structural genomics.
+
+
+
+========================================
+3. SDET / QA AUTOMATION
+(Use for SDET, QA Engineer, Automation roles)
+========================================
+
+CASE 1 — Selenium Automation for System & Regression Testing
+Role: SDET / Automation Engineering
+
+S — Situation
+Testing was done manually, creating delays and regression issues.
+
+T — Task
+Learn Selenium quickly and automate system tests and regression workflows.
+
+A — Action
+• Learned Selenium basics and automation design patterns.  
+• Converted core manual test cases into automated scripts.  
+• Built a modular framework with reusable page objects and utility layers.  
+• Added logging, reporting, and CI-friendly structure.  
+• Performed continuous validation on development builds.
+
+R — Result
+Automated 80%+ of the test suite, reduced manual testing time, and improved release quality.
+
+
+
+========================================
+2. Describe a situation where you worked with a difficult team member.
+========================================
+
+CASE 1 — Cross-Functional Alignment Between Teams
+
+S — Situation
+Integration, Services/API, and Business Analyst teams had conflicting interpretations of requirements, causing delays and disagreements.
+
+T — Task
+Align all teams on requirements, finalize user stories, and ensure smooth integration between frontend, backend, and consuming systems.
+
+A — Action
+• Scheduled a focused meeting with all stakeholders.  
+• Documented concerns, expectations, dependencies, and data-flow gaps.  
+• Facilitated a technical walkthrough of user flows and payloads.  
+• Verified assumptions using examples, logs, and test data.  
+• Standardized API contracts and refined acceptance criteria.  
+• Updated user stories in JIRA.
+
+R — Result
+All teams aligned on shared requirements, reducing rework and integration issues while improving delivery timelines.
+
+
+
+CASE 2 — Training Non-Technical Juniors in Java Development
+
+S — Situation
+Assigned to mentor junior team members with limited technical background for a Java-based backend module.
+
+T — Task
+Enable them to write clean Java code, understand the project, and independently implement features.
+
+A — Action
+• Assessed their foundation in Java, OOP, Git, and build tools.  
+• Created a structured learning plan covering core Java concepts.  
+• Provided hands-on exercises for services, unit tests, and debugging.  
+• Paired-programmed initially, then shifted them to independent tasks.  
+• Conducted code reviews focusing on clean coding and architectural practices.
+
+R — Result
+Juniors became capable of implementing features end-to-end, fixing bugs, and contributing independently. Team productivity improved and onboarding became smoother.
+
+
 3. Give an example of a goal you set and how you achieved it.
 4. Tell me about a time you made a mistake and how you handled it.
 5. Describe a situation where you had to adapt to a significant change.
