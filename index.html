@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Learning</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f7f7f7;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .section {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    }
+
+    summary {
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px 0;
+    }
+
+    pre {
+      background: #eee;
+      padding: 15px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>📘 My Learning Hub</h1>
+
+<!-- Section 1 -->
+<details class="section">
+  <summary>1. Behavioral Questions</summary>
+  <pre id="beh"></pre>
+</details>
+
+<!-- Section 2 -->
+<details class="section">
+  <summary>2. Leetcode Problems</summary>
+  <pre id="leet"></pre>
+</details>
+
+<!-- Section 3 -->
+<details class="section">
+  <summary>3. Implemented Projects</summary>
+  <pre id="proj"></pre>
+</details>
+
+<!-- Section 4 -->
+<details class="section">
+  <summary>4. System Design</summary>
+  <pre id="sys"></pre>
+</details>
+
+<script>
+  // Helper to load file content
+  function loadFile(id, file) {
+    fetch(file)
+      .then(response => response.text())
+      .then(text => document.getElementById(id).textContent = text)
+      .catch(err => document.getElementById(id).textContent = "Error loading " + file);
+  }
+
+  // Load each file (adjust file names if needed)
+  loadFile("beh", "Behavioral Questions.txt");
+  loadFile("leet", "Leetcode Problems.txt");
+  loadFile("proj", "Implemented Projects.txt");
+  loadFile("sys", "System Design.txt");
+</script>
+
+</body>
+</html>
