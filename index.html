@@ -56,8 +56,10 @@
       opacity: 0.9;
     }
 
-    .qa-block {
-      margin-bottom: 10px;
+    .main-question-block {
+      margin-bottom: 12px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 8px;
     }
 
     .question-btn {
@@ -76,8 +78,30 @@
       background: #e5e5e5;
     }
 
+    .subquestions {
+      margin-top: 6px;
+      margin-left: 15px;
+      display: none; /* hidden until main question clicked */
+    }
+
+    .subquestion-btn {
+      width: 100%;
+      text-align: left;
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    .subquestion-btn:hover {
+      background: #f1f1f1;
+    }
+
     .answer {
-      margin-top: 5px;
+      margin-top: 4px;
       display: none; /* hidden by default */
     }
   </style>
@@ -87,7 +111,7 @@
 
 <h1>📘 My Learning Hub</h1>
 
-<!-- Section 1: Behavioral Questions (Q&A style) -->
+<!-- Section 1: Behavioral Questions (Nested Q / sub-Q / answer) -->
 <div class="section">
   <h2>1. Behavioral Questions</h2>
 
@@ -96,7 +120,7 @@
   </div>
 
   <div id="beh-questions">
-    <!-- Questions + Answers will be injected here -->
+    <!-- Main questions, subquestions, and answers will be injected here -->
   </div>
 </div>
 
@@ -132,7 +156,17 @@
   loadFile("proj", "Implemented Projects.txt");
   loadFile("sys", "System Design.txt");
 
-  // Load and parse Behavioral Questions.txt into Q&A blocks
+  /**
+   * Load and parse Behavioral Questions.txt into:
+   *  - main questions:  "1. ...", "2. ..."
+   *  - subquestions:    "1.1. ...", "1.2. ..."
+   *
+   * Assumptions:
+   *  - Main question line format:    "1. Some question text"
+   *  - Subquestion line format:     "1.1. Some variant text"
+   *  - The answer for a subquestion is all following lines
+   *    until the next subquestion or main question.
+   */
   function loadBehavioralQA(file) {
     fetch(file)
       .then(response => response.text())
@@ -140,68 +174,123 @@
         const container = document.getElementById("beh-questions");
         const lines = text.split(/\r?\n/);
 
-        const blocks = [];
-        let current = null;
+        const mainQuestions = [];
+        let currentMain = null;
+        let currentSub = null;
 
         for (let rawLine of lines) {
-          const line = rawLine;           // keep original spacing
-          const trimmed = rawLine.trim(); // trimmed version
+          const line = rawLine;             // keep original formatting for answers
+          const trimmed = rawLine.trim();
 
-          // Skip leading empty lines until we find a question
-          if (!current && trimmed === "") {
+          if (!currentMain && trimmed === "") {
+            continue; // skip leading empty lines
+          }
+
+          // Detect subquestion first: "1.1. TEXT"
+          let subMatch = trimmed.match(/^(\d+\.\d+)\.\s*(.*)$/);
+          if (subMatch) {
+            // Close previous subquestion
+            if (currentSub && currentMain) {
+              currentMain.subs.push(currentSub);
+            }
+
+            const subId = subMatch[1];      // e.g. "1.1"
+            const subTitle = subMatch[2];   // e.g. "SOFTWARE ENGINEERING (SE)"
+            currentSub = {
+              id: subId,
+              title: subTitle,
+              answerLines: []
+            };
             continue;
           }
 
-          // Detect a new question:
-          //  - starts with "number + ."  e.g. "1. TELL ME..."
-          if (/^\d+\./.test(trimmed)) {
-            // If we were collecting a previous block, push it
-            if (current) {
-              blocks.push(current);
+          // Detect main question: "1. TEXT" but NOT "1.1."
+          let mainMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+          if (mainMatch && !trimmed.match(/^\d+\.\d+\./)) {
+            // Close previous subquestion and main question
+            if (currentSub && currentMain) {
+              currentMain.subs.push(currentSub);
             }
-            // Start a new block
-            current = {
-              question: trimmed,
-              answerLines: []
+            if (currentMain) {
+              mainQuestions.push(currentMain);
+            }
+
+            const mainId = mainMatch[1];   // e.g. "1"
+            const mainTitle = mainMatch[2];
+
+            currentMain = {
+              id: mainId,
+              title: mainTitle,
+              subs: []
             };
-          } else {
-            // Part of the current answer
-            if (current) {
-              current.answerLines.push(line);
-            }
+            currentSub = null;
+            continue;
+          }
+
+          // Regular content line -> belongs to current subquestion (if any)
+          if (currentSub) {
+            currentSub.answerLines.push(line);
           }
         }
 
-        // Push the last block if any
-        if (current) {
-          blocks.push(current);
+        // Push any remaining subquestion and main question
+        if (currentSub && currentMain) {
+          currentMain.subs.push(currentSub);
+        }
+        if (currentMain) {
+          mainQuestions.push(currentMain);
         }
 
-        // Render Q&A blocks
-        blocks.forEach((block, index) => {
-          const qaDiv = document.createElement("div");
-          qaDiv.className = "qa-block";
+        // Render UI
+        mainQuestions.forEach(mainQ => {
+          const mainDiv = document.createElement("div");
+          mainDiv.className = "main-question-block";
 
-          const qBtn = document.createElement("button");
-          qBtn.className = "question-btn";
-          qBtn.textContent = block.question;
+          // Main question button (e.g., "1. Tell me about a time...")
+          const mainBtn = document.createElement("button");
+          mainBtn.className = "question-btn";
+          mainBtn.textContent = mainQ.id + ". " + mainQ.title;
 
-          const ans = document.createElement("pre");
-          ans.className = "answer";
-          ans.textContent = block.answerLines.join("\n").trim();
+          // Subquestions container (hidden by default)
+          const subContainer = document.createElement("div");
+          subContainer.className = "subquestions";
 
-          // Toggle answer on question click
-          qBtn.addEventListener("click", () => {
-            const isHidden = ans.style.display === "none" || ans.style.display === "";
-            ans.style.display = isHidden ? "block" : "none";
+          mainQ.subs.forEach(subQ => {
+            const subDiv = document.createElement("div");
+
+            // Subquestion button (e.g., "1.1. SOFTWARE ENGINEERING (SE)")
+            const subBtn = document.createElement("button");
+            subBtn.className = "subquestion-btn";
+            subBtn.textContent = subQ.id + ". " + subQ.title;
+
+            // Answer block
+            const ans = document.createElement("pre");
+            ans.className = "answer";
+            ans.textContent = subQ.answerLines.join("\n").trim();
+
+            // Toggle answer on subquestion click
+            subBtn.addEventListener("click", () => {
+              const isHidden = ans.style.display === "none" || ans.style.display === "";
+              ans.style.display = isHidden ? "block" : "none";
+            });
+
+            subDiv.appendChild(subBtn);
+            subDiv.appendChild(ans);
+            subContainer.appendChild(subDiv);
           });
 
-          qaDiv.appendChild(qBtn);
-          qaDiv.appendChild(ans);
-          container.appendChild(qaDiv);
+          // Toggle subquestions on main question click
+          mainBtn.addEventListener("click", () => {
+            const isHidden = subContainer.style.display === "none" || subContainer.style.display === "";
+            subContainer.style.display = isHidden ? "block" : "none";
+          });
+
+          mainDiv.appendChild(mainBtn);
+          mainDiv.appendChild(subContainer);
+          container.appendChild(mainDiv);
         });
 
-        // Show all / hide all logic
+        // Show all / hide all answers
         const showAllBtn = document.getElementById("showAllBeh");
         let allVisible = false;
 
@@ -212,6 +301,12 @@
             a.style.display = allVisible ? "block" : "none";
           });
           showAllBtn.textContent = allVisible ? "Hide all answers" : "Show all answers";
+
+          // Optionally also expand all subquestion containers when showing all
+          const subContainers = container.querySelectorAll(".subquestions");
+          subContainers.forEach(sc => {
+            sc.style.display = allVisible ? "block" : sc.style.display;
+          });
         });
       })
       .catch(err => {
