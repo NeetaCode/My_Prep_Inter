@@ -34,6 +34,52 @@
       border-radius: 5px;
       white-space: pre-wrap;
     }
+
+    /* Behavioral Q&A styling */
+    #beh-controls {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 10px;
+    }
+
+    #showAllBeh {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      background: #007bff;
+      color: white;
+    }
+
+    #showAllBeh:hover {
+      opacity: 0.9;
+    }
+
+    .qa-block {
+      margin-bottom: 10px;
+    }
+
+    .question-btn {
+      width: 100%;
+      text-align: left;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background: #f0f0f0;
+      cursor: pointer;
+    }
+
+    .question-btn:hover {
+      background: #e5e5e5;
+    }
+
+    .answer {
+      margin-top: 5px;
+      display: none; /* hidden by default */
+    }
   </style>
 </head>
 
@@ -41,11 +87,18 @@
 
 <h1>📘 My Learning Hub</h1>
 
-<!-- Section 1 -->
-<details class="section">
-  <summary>1. Behavioral Questions</summary>
-  <pre id="beh"></pre>
-</details>
+<!-- Section 1: Behavioral Questions (Q&A style) -->
+<div class="section">
+  <h2>1. Behavioral Questions</h2>
+
+  <div id="beh-controls">
+    <button id="showAllBeh">Show all answers</button>
+  </div>
+
+  <div id="beh-questions">
+    <!-- Questions + Answers will be injected here -->
+  </div>
+</div>
 
 <!-- Section 2 -->
 <details class="section">
@@ -66,7 +119,7 @@
 </details>
 
 <script>
-  // Helper to load file content
+  // Helper to load simple text files into <pre>
   function loadFile(id, file) {
     fetch(file)
       .then(response => response.text())
@@ -74,11 +127,101 @@
       .catch(err => document.getElementById(id).textContent = "Error loading " + file);
   }
 
-  // Load each file (adjust file names if needed)
-  loadFile("beh", "Behavioral Questions.txt");
+  // Load Leetcode / Projects / System Design as before
   loadFile("leet", "Leetcode Problems.txt");
   loadFile("proj", "Implemented Projects.txt");
   loadFile("sys", "System Design.txt");
+
+  // Load and parse Behavioral Questions.txt into Q&A blocks
+  function loadBehavioralQA(file) {
+    fetch(file)
+      .then(response => response.text())
+      .then(text => {
+        const container = document.getElementById("beh-questions");
+        const lines = text.split(/\r?\n/);
+
+        const blocks = [];
+        let current = null;
+
+        for (let rawLine of lines) {
+          const line = rawLine;           // keep original spacing
+          const trimmed = rawLine.trim(); // trimmed version
+
+          // Skip leading empty lines until we find a question
+          if (!current && trimmed === "") {
+            continue;
+          }
+
+          // Detect a new question:
+          //  - starts with "number + ."  e.g. "1. TELL ME..."
+          if (/^\d+\./.test(trimmed)) {
+            // If we were collecting a previous block, push it
+            if (current) {
+              blocks.push(current);
+            }
+            // Start a new block
+            current = {
+              question: trimmed,
+              answerLines: []
+            };
+          } else {
+            // Part of the current answer
+            if (current) {
+              current.answerLines.push(line);
+            }
+          }
+        }
+
+        // Push the last block if any
+        if (current) {
+          blocks.push(current);
+        }
+
+        // Render Q&A blocks
+        blocks.forEach((block, index) => {
+          const qaDiv = document.createElement("div");
+          qaDiv.className = "qa-block";
+
+          const qBtn = document.createElement("button");
+          qBtn.className = "question-btn";
+          qBtn.textContent = block.question;
+
+          const ans = document.createElement("pre");
+          ans.className = "answer";
+          ans.textContent = block.answerLines.join("\n").trim();
+
+          // Toggle answer on question click
+          qBtn.addEventListener("click", () => {
+            const isHidden = ans.style.display === "none" || ans.style.display === "";
+            ans.style.display = isHidden ? "block" : "none";
+          });
+
+          qaDiv.appendChild(qBtn);
+          qaDiv.appendChild(ans);
+          container.appendChild(qaDiv);
+        });
+
+        // Show all / hide all logic
+        const showAllBtn = document.getElementById("showAllBeh");
+        let allVisible = false;
+
+        showAllBtn.addEventListener("click", () => {
+          allVisible = !allVisible;
+          const answers = container.querySelectorAll(".answer");
+          answers.forEach(a => {
+            a.style.display = allVisible ? "block" : "none";
+          });
+          showAllBtn.textContent = allVisible ? "Hide all answers" : "Show all answers";
+        });
+      })
+      .catch(err => {
+        const container = document.getElementById("beh-questions");
+        container.textContent = "Error loading Behavioral Questions.txt";
+      });
+  }
+
+  // Start loading behavioral Q&A
+  loadBehavioralQA("Behavioral Questions.txt");
 </script>
 
 </body>
