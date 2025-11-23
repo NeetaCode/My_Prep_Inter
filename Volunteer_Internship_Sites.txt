@@ -1,0 +1,96 @@
+________________________________________
+Trusted Volunteer and Internship Sites for AI Software Engineers
+(Recognized by major companies including Google, Meta, Microsoft, Amazon, Tesla, NVIDIA, and Databricks)
+________________________________________
+1. Google Summer of Code (GSoC)
+Type: Verified open source AI and software engineering projects
+Trusted Because: Google program with real open source organizations
+Joining: Yearly cycle, but many organizations accept contributors anytime
+Site: https://summerofcode.withgoogle.com/
+________________________________________
+2. Omdena
+Type: Collaborative AI volunteer projects
+Trusted Because: Real NGO and startup problems, strong resume value
+Joining: Immediate, new projects start every 2 to 4 weeks
+Site: https://omdena.com/
+________________________________________
+3. United Nations Online Volunteers
+Type: AI, machine learning, natural language processing, data science
+Trusted Because: United Nations backed, globally recognized
+Joining: Rolling openings, remote friendly
+Site: https://www.onlinevolunteering.org/
+________________________________________
+4. GitHub Open Source AI Contributions
+Type: AI frameworks such as TensorFlow, PyTorch, HuggingFace, LangChain
+Trusted Because: Public and verifiable contributions
+Joining: Immediate
+Site: https://github.com/
+________________________________________
+5. DataKind
+Type: Data science and AI for nonprofit organizations
+Trusted Because: Reputable data-for-good organization
+Joining: Based on project cycles
+Site: https://www.datakind.org/
+________________________________________
+6. Kaggle
+Type: Machine learning projects, competitions, datasets
+Trusted Because: Used by Google, Meta, AWS, NVIDIA
+Joining: Immediate
+Site: https://www.kaggle.com/
+________________________________________
+7. Zindi Africa
+Type: AI and machine learning competitions for social impact
+Trusted Because: Supported by Google Developers, AWS, Microsoft
+Joining: Immediate
+Site: https://zindi.africa/
+________________________________________
+8. Mozilla Open Source AI Projects
+Type: Responsible AI, NLP, speech processing
+Trusted Because: Mozilla Foundation global credibility
+Joining: Immediate
+Site: https://github.com/mozilla/
+________________________________________
+9. Microsoft Learn Student Ambassadors
+Type: AI education, cloud events, community programs
+Trusted Because: Official Microsoft program
+Joining: Cycles open multiple times a year
+Site: https://studentambassadors.microsoft.com/
+________________________________________
+10. OpenMined
+Type: Privacy preserving AI, federated learning, secure ML
+Trusted Because: Used and referenced by researchers from Google, Meta, DeepMind
+Joining: Immediate
+Site: https://www.openmined.org/
+________________________________________
+11. AI for Good Global Initiatives
+Type: AI for climate, education, health, community development
+Trusted Because: Supported by Microsoft, Google, Mila, CIFAR
+Joining: Based on program availability
+Site: https://ai4good.org/
+________________________________________
+12. FreeCodeCamp and Codecademy Projects
+Type: Open source educational AI and ML projects
+Trusted Because: Large reputable communities with verifiable contributions
+Joining: Immediate
+Sites:
+https://github.com/freeCodeCamp/freeCodeCamp
+https://www.codecademy.com/
+________________________________________
+13. HuggingFace Open Source
+Type: Transformers, datasets, LLM tools, diffusers
+Trusted Because: Industry standard and used by major companies
+Joining: Immediate
+Site: https://github.com/huggingface
+________________________________________
+14. CERN OpenLab
+Type: AI and ML research internships
+Trusted Because: Prestigious global science institution
+Joining: Annual cycles
+Site: https://openlab.cern/
+________________________________________
+15. Linux Foundation AI
+Type: Open source AI infrastructure and ML operations
+Trusted Because: Enterprise backed and globally respected
+Joining: Immediate
+Site: https://www.linuxfoundation.ai/
+
