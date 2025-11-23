@@ -26,6 +26,7 @@
       font-size: 18px;
       font-weight: bold;
       padding: 10px 0;
+      outline: none;
     }
 
     pre {
@@ -38,11 +39,14 @@
     /* Behavioral Q&A styling */
     #beh-controls {
       display: flex;
+      gap: 8px;
       justify-content: flex-end;
       margin-bottom: 10px;
+      margin-top: 5px;
     }
 
-    #showAllBeh {
+    #showAllBeh,
+    #collapseBeh {
       padding: 6px 12px;
       border: none;
       border-radius: 4px;
@@ -52,7 +56,8 @@
       color: white;
     }
 
-    #showAllBeh:hover {
+    #showAllBeh:hover,
+    #collapseBeh:hover {
       opacity: 0.9;
     }
 
@@ -111,18 +116,19 @@
 
 <h1>📘 My Learning Hub</h1>
 
-<!-- Section 1: Behavioral Questions (Nested Q / sub-Q / answer) -->
-<div class="section">
-  <h2>1. Behavioral Questions</h2>
+<!-- Section 1: Behavioral Questions (collapsible) -->
+<details class="section" id="beh-section">
+  <summary>1. Behavioral Questions</summary>
 
   <div id="beh-controls">
     <button id="showAllBeh">Show all answers</button>
+    <button id="collapseBeh">Hide section</button>
   </div>
 
   <div id="beh-questions">
     <!-- Main questions, subquestions, and answers will be injected here -->
   </div>
-</div>
+</details>
 
 <!-- Section 2 -->
 <details class="section">
@@ -161,14 +167,6 @@
    *  - main questions:  "1. ...", "2. ..."
    *  - subquestions:    "1.1. ...", "1.2. ..."
    *  - default answers for mains that have no subquestions (e.g., 4, 5, 6...)
-   *
-   * Assumptions:
-   *  - Main question line format:    "1. Some question text"
-   *  - Subquestion line format:     "1.1. Some variant text"
-   *  - The answer for a subquestion is all following lines
-   *    until the next subquestion or main question.
-   *  - The answer for a main-only question (no 1.1) is all
-   *    following lines until the next main question.
    */
   function loadBehavioralQA(file) {
     fetch(file)
@@ -226,15 +224,13 @@
               id: mainId,
               title: mainTitle,
               subs: [],
-              defaultLines: []  // for questions without subquestions (e.g., 4–10)
+              defaultLines: []  // for questions without subquestions
             };
             currentSub = null;
             continue;
           }
 
           // Regular content line:
-          //  - If we are in a subquestion → belongs to sub answer
-          //  - Else if we are inside a main → belongs to main default answer
           if (currentSub && currentMain) {
             currentSub.answerLines.push(line);
           } else if (currentMain) {
@@ -266,25 +262,22 @@
           const subContainer = document.createElement("div");
           subContainer.className = "subquestions";
 
-          // Optional default answer (for main-only questions like 4, 5, 6...)
+          // Optional default answer (for main-only questions)
           let defaultAns = null;
           if (mainQ.defaultLines && mainQ.defaultLines.join("").trim().length > 0) {
             defaultAns = document.createElement("pre");
             defaultAns.className = "answer";
             defaultAns.textContent = mainQ.defaultLines.join("\n").trim();
-            // hidden by default via .answer CSS
           }
 
-          // Build subquestion blocks (for 1.1, 1.2, 1.3, etc.)
+          // Build subquestion blocks
           mainQ.subs.forEach(subQ => {
             const subDiv = document.createElement("div");
 
-            // Subquestion button (e.g., "1.1. SOFTWARE ENGINEERING (SE)")
             const subBtn = document.createElement("button");
             subBtn.className = "subquestion-btn";
             subBtn.textContent = subQ.id + ". " + subQ.title;
 
-            // Answer block
             const ans = document.createElement("pre");
             ans.className = "answer";
             ans.textContent = subQ.answerLines.join("\n").trim();
@@ -301,15 +294,13 @@
           });
 
           // Toggle behavior when clicking the main question:
-          //  - If there are subquestions → toggle their container
-          //  - If there is a default answer → toggle that answer
           mainBtn.addEventListener("click", () => {
             // Toggle subquestions (if any)
             if (mainQ.subs.length > 0) {
               const isHidden = subContainer.style.display === "none" || subContainer.style.display === "";
               subContainer.style.display = isHidden ? "block" : "none";
             }
-            // Toggle default answer (for questions with no subs, e.g., 4–10)
+            // Toggle default answer (for questions with no subs)
             if (defaultAns) {
               const isHidden = defaultAns.style.display === "none" || defaultAns.style.display === "";
               defaultAns.style.display = isHidden ? "block" : "none";
@@ -318,12 +309,10 @@
 
           mainDiv.appendChild(mainBtn);
 
-          // If we have subquestions, add the container
           if (mainQ.subs.length > 0) {
             mainDiv.appendChild(subContainer);
           }
 
-          // If we have a default answer (4–10), add it under the main question
           if (defaultAns) {
             mainDiv.appendChild(defaultAns);
           }
@@ -333,6 +322,8 @@
 
         // Show all / hide all answers
         const showAllBtn = document.getElementById("showAllBeh");
+        const behDetails = document.getElementById("beh-section");
+        const collapseBtn = document.getElementById("collapseBeh");
         let allVisible = false;
 
         showAllBtn.addEventListener("click", () => {
@@ -348,6 +339,23 @@
           subContainers.forEach(sc => {
             sc.style.display = allVisible ? "block" : sc.style.display;
           });
+        });
+
+        // Collapse the whole section when "Hide section" is clicked
+        collapseBtn.addEventListener("click", () => {
+          behDetails.open = false;
+        });
+
+        // When the section is expanded, reset to "questions only"
+        behDetails.addEventListener("toggle", () => {
+          if (behDetails.open) {
+            const answers = container.querySelectorAll(".answer");
+            answers.forEach(a => {
+              a.style.display = "none";
+            });
+            allVisible = false;
+            showAllBtn.textContent = "Show all answers";
+          }
         });
       })
       .catch(err => {
