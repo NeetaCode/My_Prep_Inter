@@ -109,6 +109,14 @@
       margin-top: 4px;
       display: none; /* hidden by default */
     }
+
+    /* Implemented Projects / AI SWE styling */
+    .subsection-title {
+      margin-top: 10px;
+      margin-bottom: 4px;
+      font-weight: bold;
+      font-size: 16px;
+    }
   </style>
 </head>
 
@@ -136,10 +144,21 @@
   <pre id="leet"></pre>
 </details>
 
-<!-- Section 3 -->
+<!-- Section 3: Implemented Projects / AI SWE Interview Prep -->
 <details class="section">
-  <summary>3. Implemented Projects</summary>
-  <pre id="proj"></pre>
+  <summary>3. Implemented Projects / AI SWE Interview Prep</summary>
+
+  <div class="subsection-title">AI Software Engineer Interview Questions</div>
+  <pre id="ai-questions"></pre>
+
+  <div class="subsection-title">Recommended AI Interview Question Resources</div>
+  <pre id="ai-resources"></pre>
+
+  <div class="subsection-title">Work Experience</div>
+  <pre id="ai-work"></pre>
+
+  <div class="subsection-title">Projects</div>
+  <pre id="ai-projects"></pre>
 </details>
 
 <!-- Section 4 -->
@@ -157,16 +176,15 @@
       .catch(err => document.getElementById(id).textContent = "Error loading " + file);
   }
 
-  // Load Leetcode / Projects / System Design as before
+  // Load Leetcode / System Design as plain text
   loadFile("leet", "Leetcode Problems.txt");
-  loadFile("proj", "Implemented Projects.txt");
   loadFile("sys", "System Design.txt");
 
   /**
    * Load and parse Behavioral Questions.txt into:
    *  - main questions:  "1. ...", "2. ..."
    *  - subquestions:    "1.1. ...", "1.2. ..."
-   *  - default answers for mains that have no subquestions (e.g., 4, 5, 6...)
+   *  - default answers for mains that have no subquestions
    */
   function loadBehavioralQA(file) {
     fetch(file)
@@ -180,10 +198,9 @@
         let currentSub = null;
 
         for (let rawLine of lines) {
-          const line = rawLine;             // keep original formatting for answers
+          const line = rawLine;
           const trimmed = rawLine.trim();
 
-          // Skip leading empties before first main question
           if (!currentMain && trimmed === "") {
             continue;
           }
@@ -191,13 +208,12 @@
           // Detect subquestion: "1.1. TEXT"
           const subMatch = trimmed.match(/^(\d+\.\d+)\.\s*(.*)$/);
           if (subMatch) {
-            // Close previous subquestion
             if (currentSub && currentMain) {
               currentMain.subs.push(currentSub);
             }
 
-            const subId = subMatch[1];      // e.g. "1.1"
-            const subTitle = subMatch[2];   // e.g. "SOFTWARE ENGINEERING (SE)"
+            const subId = subMatch[1];
+            const subTitle = subMatch[2];
             currentSub = {
               id: subId,
               title: subTitle,
@@ -209,7 +225,6 @@
           // Detect main question: "1. TEXT" but NOT "1.1."
           const mainMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
           if (mainMatch && !trimmed.match(/^\d+\.\d+\./)) {
-            // Close previous subquestion and main question
             if (currentSub && currentMain) {
               currentMain.subs.push(currentSub);
             }
@@ -217,14 +232,14 @@
               mainQuestions.push(currentMain);
             }
 
-            const mainId = mainMatch[1];   // e.g. "1"
+            const mainId = mainMatch[1];
             const mainTitle = mainMatch[2];
 
             currentMain = {
               id: mainId,
               title: mainTitle,
               subs: [],
-              defaultLines: []  // for questions without subquestions
+              defaultLines: []
             };
             currentSub = null;
             continue;
@@ -235,12 +250,9 @@
             currentSub.answerLines.push(line);
           } else if (currentMain) {
             currentMain.defaultLines.push(line);
-          } else {
-            // Still before the first main question, ignore
           }
         }
 
-        // Push any remaining subquestion and main question
         if (currentSub && currentMain) {
           currentMain.subs.push(currentSub);
         }
@@ -253,16 +265,13 @@
           const mainDiv = document.createElement("div");
           mainDiv.className = "main-question-block";
 
-          // Main question button (e.g., "1. Tell me about a time...")
           const mainBtn = document.createElement("button");
           mainBtn.className = "question-btn";
           mainBtn.textContent = mainQ.id + ". " + mainQ.title;
 
-          // Container for subquestions (if any)
           const subContainer = document.createElement("div");
           subContainer.className = "subquestions";
 
-          // Optional default answer (for main-only questions)
           let defaultAns = null;
           if (mainQ.defaultLines && mainQ.defaultLines.join("").trim().length > 0) {
             defaultAns = document.createElement("pre");
@@ -270,7 +279,6 @@
             defaultAns.textContent = mainQ.defaultLines.join("\n").trim();
           }
 
-          // Build subquestion blocks
           mainQ.subs.forEach(subQ => {
             const subDiv = document.createElement("div");
 
@@ -282,7 +290,6 @@
             ans.className = "answer";
             ans.textContent = subQ.answerLines.join("\n").trim();
 
-            // Toggle answer on subquestion click
             subBtn.addEventListener("click", () => {
               const isHidden = ans.style.display === "none" || ans.style.display === "";
               ans.style.display = isHidden ? "block" : "none";
@@ -293,14 +300,11 @@
             subContainer.appendChild(subDiv);
           });
 
-          // Toggle behavior when clicking the main question:
           mainBtn.addEventListener("click", () => {
-            // Toggle subquestions (if any)
             if (mainQ.subs.length > 0) {
               const isHidden = subContainer.style.display === "none" || subContainer.style.display === "";
               subContainer.style.display = isHidden ? "block" : "none";
             }
-            // Toggle default answer (for questions with no subs)
             if (defaultAns) {
               const isHidden = defaultAns.style.display === "none" || defaultAns.style.display === "";
               defaultAns.style.display = isHidden ? "block" : "none";
@@ -320,7 +324,6 @@
           container.appendChild(mainDiv);
         });
 
-        // Show all / hide all answers
         const showAllBtn = document.getElementById("showAllBeh");
         const behDetails = document.getElementById("beh-section");
         const collapseBtn = document.getElementById("collapseBeh");
@@ -334,19 +337,16 @@
           });
           showAllBtn.textContent = allVisible ? "Hide all answers" : "Show all answers";
 
-          // Also expand all subquestion containers when showing all
           const subContainers = container.querySelectorAll(".subquestions");
           subContainers.forEach(sc => {
             sc.style.display = allVisible ? "block" : sc.style.display;
           });
         });
 
-        // Collapse the whole section when "Hide section" is clicked
         collapseBtn.addEventListener("click", () => {
           behDetails.open = false;
         });
 
-        // When the section is expanded, reset to "questions only"
         behDetails.addEventListener("toggle", () => {
           if (behDetails.open) {
             const answers = container.querySelectorAll(".answer");
@@ -364,8 +364,82 @@
       });
   }
 
-  // Start loading behavioral Q&A
+  // Load Behavioral Q&A
   loadBehavioralQA("Behavioral Questions.txt");
+
+  /**
+   * Load and parse Implemented Projects.txt which contains:
+   * - AI SOFTWARE ENGINEER INTERVIEW QUESTIONS
+   * - Recommended AI Interview Question Resources
+   * - WORK EXPERIENCE
+   * - PROJECTS
+   */
+  function loadImplementedProjects(file) {
+    fetch(file)
+      .then(response => response.text())
+      .then(text => {
+        const lines = text.split(/\r?\n/);
+
+        let currentSection = null;
+        const sections = {
+          aiQuestions: [],
+          resources: [],
+          work: [],
+          projects: []
+        };
+
+        lines.forEach(line => {
+          const trimmed = line.trim();
+
+          if (trimmed === "AI SOFTWARE ENGINEER INTERVIEW QUESTIONS") {
+            currentSection = "aiQuestions";
+            return;
+          }
+          if (trimmed === "Recommended AI Interview Question Resources") {
+            currentSection = "resources";
+            return;
+          }
+          if (trimmed === "WORK EXPERIENCE") {
+            currentSection = "work";
+            return;
+          }
+          if (trimmed === "PROJECTS") {
+            currentSection = "projects";
+            return;
+          }
+
+          // ignore pure separator lines but keep others
+          if (trimmed === "________________________________________") {
+            // keep separators inside wherever needed
+            if (currentSection && sections[currentSection]) {
+              sections[currentSection].push(trimmed);
+            }
+            return;
+          }
+
+          if (currentSection && sections[currentSection]) {
+            sections[currentSection].push(line);
+          }
+        });
+
+        // Fill the pre blocks
+        const aiQ = document.getElementById("ai-questions");
+        const aiR = document.getElementById("ai-resources");
+        const aiW = document.getElementById("ai-work");
+        const aiP = document.getElementById("ai-projects");
+
+        aiQ.textContent = (sections.aiQuestions || []).join("\n").trim();
+        aiR.textContent = (sections.resources || []).join("\n").trim();
+        aiW.textContent = (sections.work || []).join("\n").trim();
+        aiP.textContent = (sections.projects || []).join("\n").trim();
+      })
+      .catch(err => {
+        document.getElementById("ai-questions").textContent = "Error loading Implemented Projects.txt";
+      });
+  }
+
+  // Load Implemented Projects / AI SWE data
+  loadImplementedProjects("Implemented Projects.txt");
 </script>
 
 </body>
