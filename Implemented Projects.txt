@@ -1,107 +1,117 @@
 AI SOFTWARE ENGINEER INTERVIEW QUESTIONS
+________________________________________
 1. Explain your thesis project and the biggest technical challenge you solved
 My thesis focuses on Adaptive Retrieval Augmented Prompting (ARAP), a method designed to improve mathematical reasoning in large language models. I built a dual retrieval system that combines Example RAG, Formula RAG, and Chain of Thought prompting.
 The main challenge was achieving consistent numerical accuracy from open source LLMs, which often produce unstable answers.
 To solve this, I designed structured prompts with explicit variable mapping, built a MiniMathKB for formula retrieval, and improved search quality by combining BM25 with MiniLM embeddings. I also used repeat decoding and consistency checking to reduce hallucinations and stabilize final answers.
 ________________________________________
 2. You improved LLM accuracy by up to 35 percent. What contributed the most?
-Several techniques had a significant impact:
-•	Better retrieval quality using BM25 combined with MiniLM embeddings
-•	Structured prompts that clearly separated knowns, unknowns, and goals
-•	Injecting mathematical formulas from MiniMathKB to anchor reasoning
-•	Explicit final answer tagging to reduce hallucination
-•	Decomposition prompts that guided the model through multi step problems
+Several techniques had significant impact:
+• Better retrieval quality using BM25 combined with MiniLM embeddings
+• Structured prompts that clearly separated knowns, unknowns, and goals
+• Injecting mathematical formulas from MiniMathKB to anchor reasoning
+• Explicit final answer tagging to reduce hallucinations
+• Decomposition prompts that guided the model through multi step reasoning
 These changes strengthened reasoning reliability and reduced typical LLM errors.
 ________________________________________
-3. Tell me about optimizing an HPC or scientific workflow.
+3. Tell me about optimizing an HPC or scientific workflow
 During my Research Assistant role, I optimized genomic analysis pipelines that processed large scale datasets. I rewrote Python modules to reduce overhead, improved batch operations, and used multiprocessing to better utilize CPU resources.
 I deployed workloads inside Docker containers with CUDA acceleration on HPC clusters, which improved computational performance by about 30 percent.
-Additionally, I used Google Cloud VMs and Cloud Storage for parallel executions, enabling reproducible and scalable experiment runs.
+Additionally, I used Google Cloud VMs and Cloud Storage for parallel executions, enabling scalable and reproducible experiment runs.
 ________________________________________
 4. What is the most impactful Python automation you have built?
-At UCCS OIT, I created a Python based automation system to configure and provision network devices. It integrated shell scripts, network configuration logic, and multiprocessing to speed up device setup.
+At UCCS OIT, I created a Python based automation system to configure and provision network devices. It integrated shell scripts, network configuration logic, and multiprocessing to accelerate device setup.
 This automation reduced manual provisioning time by around 40 percent and improved reliability by adding API based validation, structured logging, and error handling.
 ________________________________________
 5. Describe your experience with Docker, CUDA, and HPC clusters
 I have used Docker extensively to containerize machine learning pipelines, ensuring consistent environments across devices.
-For reinforcement learning based chromosome reconstruction, I used CUDA to accelerate training on GPUs, which reduced cycles by about 40 percent.
+For reinforcement learning based chromosome reconstruction, I used CUDA to accelerate training on GPUs, reducing cycles by about 40 percent.
 On HPC clusters, I executed genomic workflows in parallel and ensured reproducibility through containerized deployments.
 I also use Docker regularly for ML deployment, environment isolation, and experiment reproducibility.
 ________________________________________
 6. How did you ensure generalization in your accent identification model?
 The accent identification model required strong generalization to handle diverse speakers.
-I used audio normalization, MFCC feature extraction, and noise reduction to improve input quality.
-Training used PyTorch and TensorFlow with dropout and data augmentation, which reduced overfitting and improved generalization.
+I applied audio normalization, MFCC feature extraction, and noise reduction to improve input quality.
+Training used PyTorch and TensorFlow with dropout and data augmentation, which reduced overfitting and improved robustness.
 These improvements led to about a 20 percent increase in ASR accuracy across accents.
 ________________________________________
 7. When do you choose ML over rule based engineering, and vice versa?
 I choose ML when the problem involves variation, uncertainty, or natural signals such as language and audio.
-Rule based or engineering solutions are better for predictable, structured workflows like infrastructure automation or configuration scripts.
-I always pick the simplest method that achieves strong performance, reliability, and maintainability.
+Rule based or engineering solutions are better for predictable, structured workflows like automation or configuration scripts.
+I always choose the simplest method that provides strong performance, reliability, and maintainability.
 ________________________________________
 8. Give an example where you improved a system by 30 to 40 percent
 At Capgemini, deployment pipelines were slowed down by manual steps. I automated them with Jenkins and PowerShell, reducing release time by about 40 percent.
-At UCCS, manual network provisioning was the bottleneck. I automated it using Python multiprocessing, reducing time by about 40 percent.
+At UCCS OIT, manual network provisioning was slow. I automated it using Python multiprocessing, reducing setup time by about 40 percent.
 ________________________________________
 9. How did you collaborate with domain scientists in your Research Assistant role?
-I met with researchers regularly to understand their scientific goals, data formats, and computational challenges.
-I converted their requirements into optimized Python pipelines, improved algorithms, and containerized workloads for portability.
-I validated results, documented processes clearly, and ensured all workflows were reproducible across HPC and GCP environments.
+I met with researchers regularly to understand their scientific goals, dataset structures, and computational challenges.
+I converted their requirements into optimized Python pipelines, improved algorithms, and containerized workflows for portability.
+I validated results, documented processes, and ensured that all workflows were reproducible across HPC and GCP systems.
 ________________________________________
 10. What types of AI powered applications do you enjoy building?
-I enjoy building reasoning centered and scientific AI systems. These include RAG pipelines, mathematical reasoning systems, HPC accelerated ML workflows, and automated analytical tools.
-I find satisfaction in improving accuracy, increasing reliability, and creating end to end systems that minimize manual effort while increasing performance.
+I enjoy building reasoning centered and scientific AI systems such as RAG pipelines, mathematical reasoning models, HPC accelerated ML workflows, and automated analytical tools.
+I focus on improving accuracy, reliability, and the end to end efficiency of AI systems to reduce manual work while increasing performance.
+________________________________________
+Recommended AI Interview Question Resources
+https://www.datacamp.com/blog/ai-interview-questions
+https://github.com/andrewekhalel/MLQuestions
+https://www.geeksforgeeks.org/artificial-intelligence/artificial-intelligenceai-interview-questions-and-answers/
+https://www.turing.com/interview-questions/artificial-intelligence
+https://www.edx.org/resources/prep-for-your-ai-interview-with-these-questions-and-answers
 ________________________________________
 WORK EXPERIENCE
+________________________________________
 Wireless Network Assistant, UCCS OIT, Colorado Springs USA (Jun 2024 to Aug 2025)
-•	Built Python based automations that reduced network provisioning time by about 40 percent
-•	Monitored and maintained Windows and Linux systems using SolarWinds and ClearPass
-•	Reduced downtime incidents by 25 percent through improved monitoring and issue resolution
+• Built Python based automations that reduced network provisioning time by about 40 percent
+• Monitored and maintained Windows and Linux systems using SolarWinds and ClearPass
+• Reduced downtime incidents by 25 percent through improved monitoring and issue resolution
 ________________________________________
 Research Assistant, UCCS College of Engineering and Applied Science USA (Aug 2023 to May 2024)
-•	Processed and visualized large genomic datasets and improved ML workflow efficiency by about 30 percent
-•	Containerized end to end ML systems using Docker, CUDA, and GCP for scalable and reproducible experimentation
-•	Refactored code bases into modular Python scripts with embedded feature engineering
+• Processed and visualized large genomic datasets and improved ML workflow efficiency by about 30 percent
+• Containerized end to end ML systems using Docker, CUDA, and GCP for scalable and reproducible experimentation
+• Refactored code bases into modular Python scripts with embedded feature engineering
 ________________________________________
 Senior Software Engineer, Accolite Digital, Bangalore India (Aug 2021 to Jan 2023)
-•	Developed backend systems in C Sharp and built Selenium test suites, improving release speed by 30 percent and reducing defects by 25 percent
-•	Managed CI CD pipelines using Jenkins and Azure DevOps, reducing manual deployment work by 50 percent
-•	Improved monitoring and deployment scripts for better reliability and visibility
+• Developed backend systems in C Sharp and built Selenium test suites, improving release speed by 30 percent and reducing defects by 25 percent
+• Managed CI CD pipelines using Jenkins and Azure DevOps, reducing manual deployment work by 50 percent
+• Improved monitoring and deployment scripts for better reliability and visibility
 ________________________________________
 Software Consultant, Capgemini, Bangalore India (Nov 2019 to Aug 2021)
-•	Built and tested REST APIs using Java, Selenium, and Postman, improving QA turnaround by 40 percent
-•	Containerized applications using Docker and Kubernetes, enhancing scalability and environment consistency
-•	Migrated systems to cloud and implemented CI CD using Git and Jenkins
+• Built and tested REST APIs using Java, Selenium, and Postman, improving QA turnaround by 40 percent
+• Containerized applications using Docker and Kubernetes, enhancing scalability and environment consistency
+• Migrated systems to cloud and implemented CI CD using Git and Jenkins
 ________________________________________
 Systems Engineer, Tata Consultancy Services, Bangalore India (Jun 2015 to Nov 2019)
-•	Delivered backend services in Java, C Plus Plus, and Shell scripting, ensuring high availability
-•	Tuned complex SQL queries and improved database performance by 25 percent
-•	Automated CI CD pipelines using PowerShell and Jenkins, reducing release time by 40 percent
-•	Mentored junior engineers and improved onboarding efficiency by 30 percent
-•	Diagnosed and fixed concurrency and threading issues in distributed systems
+• Delivered backend services in Java, C Plus Plus, and Shell scripting, ensuring high availability
+• Tuned complex SQL queries and improved database performance by 25 percent
+• Automated CI CD pipelines using PowerShell and Jenkins, reducing release time by 40 percent
+• Mentored junior engineers and improved onboarding efficiency by 30 percent
+• Diagnosed and fixed concurrency and threading issues in distributed systems
 ________________________________________
 PROJECTS
+________________________________________
 Prompt Engineering for LLMs (Jan 2025 to Present)
-•	Improved LLM accuracy by 35 percent on GSM8K, SVAMP, and MAWPS datasets
-•	Enhanced retrieval relevance by 22 percent using semantic search in RAG pipelines
-•	Performed GPU optimized fine tuning of LLaMA and ChatGPT 3.5 on GCP, reducing inference cost by 20 percent
-•	Built structured prompting templates to reduce hallucination and improve reasoning reliability
+• Improved LLM accuracy by 35 percent on GSM8K, SVAMP, and MAWPS datasets
+• Enhanced retrieval relevance by 22 percent using semantic search in RAG pipelines
+• Performed GPU optimized fine tuning of LLaMA and ChatGPT 3.5 on GCP, reducing inference cost by 20 percent
+• Built structured prompting templates to reduce hallucinations and improve reasoning reliability
 ________________________________________
 Accent Identification Model, Artificial Neural Networks (May 2023 to Jan 2024)
-•	Developed a multilingual accent classifier using the Speech Accent Archive dataset
-•	Improved ASR accuracy by about 20 percent by using MFCC, noise reduction, and feature normalization
-•	Scaled ML experiments using GCP and reproducible workflows using Weights and Biases
-•	Built end to end models using PyTorch, TensorFlow, and Hugging Face
+• Developed a multilingual accent classifier using the Speech Accent Archive dataset
+• Improved ASR accuracy by about 20 percent using MFCC, noise reduction, and feature normalization
+• Scaled ML experiments using GCP and reproducible workflows using Weights and Biases
+• Built end to end models using PyTorch, TensorFlow, and Hugging Face
 ________________________________________
 Heart Disease Prediction (Jan 2024 to May 2024)
-•	Achieved 85 percent accuracy using SVM and Logistic Regression
-•	Applied PCA to reduce dimensionality and sped up inference by 30 percent
-•	Deployed models in Docker containers on GCP for scalable performance
-•	Delivered a production ready healthcare AI model with strong interpretability
+• Achieved 85 percent accuracy using SVM and Logistic Regression
+• Applied PCA to reduce dimensionality and sped up inference by 30 percent
+• Deployed models in Docker containers on GCP for scalable performance
+• Delivered a production ready healthcare AI model with strong interpretability
 ________________________________________
 3D Chromosome Reconstruction using Reinforcement Learning (Jan 2024 to May 2024)
-•	Developed an RL based model for 3D chromosome folding using Python, TensorFlow, and CUDA
-•	Improved spatial prediction accuracy using Hi C data
-•	Reduced training cycles by 40 percent using CUDA accelerated parallelization on HPC
-•	Containerized the entire workflow using Docker to ensure full reproducibility
+• Developed an RL based model for 3D chromosome folding using Python, TensorFlow, and CUDA
+• Improved spatial prediction accuracy using Hi C data
+• Reduced training cycles by 40 percent using CUDA accelerated parallelization on HPC
+• Containerized the entire workflow using Docker to ensure full reproducibility
 
