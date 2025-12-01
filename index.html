@@ -138,10 +138,10 @@
   </div>
 </details>
 
-<!-- Section 2 -->
+<!-- Section 2: Leetcode Problems (loaded as HTML fragment) -->
 <details class="section">
   <summary>2. Leetcode Problems</summary>
-  <pre id="leet"></pre>
+  <div id="leet"></div>
 </details>
 
 <!-- Section 3: Implemented Projects / AI SWE Interview Prep -->
@@ -161,7 +161,7 @@
   <pre id="ai-projects"></pre>
 </details>
 
-<!-- Section 4 -->
+<!-- Section 4: System Design -->
 <details class="section">
   <summary>4. System Design</summary>
   <pre id="sys"></pre>
@@ -176,8 +176,16 @@
       .catch(err => document.getElementById(id).textContent = "Error loading " + file);
   }
 
-  // Load Leetcode / System Design as plain text
-  loadFile("leet", "Leetcode Problems.txt");
+  // Helper to load HTML fragments into a container
+  function loadHtml(id, file) {
+    fetch(file)
+      .then(response => response.text())
+      .then(html => document.getElementById(id).innerHTML = html)
+      .catch(err => document.getElementById(id).textContent = "Error loading " + file);
+  }
+
+  // Load Leetcode (HTML fragment) and System Design (plain text)
+  loadHtml("leet", "Leetcode Problems.html");
   loadFile("sys", "System Design.txt");
 
   /**
@@ -364,8 +372,8 @@
       });
   }
 
-  // Load Behavioral Q&A
-  loadBehavioralQA("Behavioral Questions.html");
+  // Load Behavioral Q&A from plain text
+  loadBehavioralQA("Behavioral Questions.txt");
 
   /**
    * Load and parse Implemented Projects.txt which contains:
@@ -408,9 +416,8 @@
             return;
           }
 
-          // ignore pure separator lines but keep others
+          // keep separator lines if present
           if (trimmed === "________________________________________") {
-            // keep separators inside wherever needed
             if (currentSection && sections[currentSection]) {
               sections[currentSection].push(trimmed);
             }
