@@ -36,9 +36,9 @@
     <h4>Meaning</h4>
     <p>Arrays store elements in a contiguous block of memory, accessed by index.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
-for i from 0 to n - 1:
+for i in range(n):
     process(arr[i])
     </pre>
 
@@ -63,12 +63,12 @@ for i from 0 to n - 1:
     <h4>Meaning</h4>
     <p>Strings represent sequences of characters, often processed like arrays with extra rules.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
-for each character c in s:
+for c in s:
     process(c)
 
-substring = s[l : r]
+substring = s[l:r]
     </pre>
 
     <h4>Usage</h4>
@@ -92,9 +92,9 @@ substring = s[l : r]
     <h4>Meaning</h4>
     <p>Hash maps and sets store key value pairs or unique items for fast lookup.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
-freq = empty map
+freq = {}
 for x in data:
     freq[x] = freq.get(x, 0) + 1
     </pre>
@@ -120,13 +120,13 @@ for x in data:
     <h4>Meaning</h4>
     <p>Two pointers move over an array or string to avoid nested loops.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
 i = 0
 j = n - 1
 while i &lt; j:
     process(i, j)
-    move i or j based on condition
+    # move i or j based on condition
     </pre>
 
     <h4>Usage</h4>
@@ -150,15 +150,15 @@ while i &lt; j:
     <h4>Meaning</h4>
     <p>Sliding windows maintain a current subarray or substring while moving across data.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
 left = 0
-for right from 0 to n - 1:
-    add data[right]
-    while window is invalid:
-        remove data[left]
+for right in range(n):
+    add(data[right])
+    while window_is_invalid():
+        remove(data[left])
         left += 1
-    update answer
+    update_answer()
     </pre>
 
     <h4>Usage</h4>
@@ -182,9 +182,9 @@ for right from 0 to n - 1:
     <h4>Meaning</h4>
     <p>Sorting arranges elements so that later logic becomes simpler.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
-sort(data)
+data.sort()
 for x in data:
     process(x)
     </pre>
@@ -210,11 +210,11 @@ for x in data:
     <h4>Meaning</h4>
     <p>Linked lists are chains of nodes where each node points to the next.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
 current = head
-while current is not null:
-    process(current.value)
+while current is not None:
+    process(current.val)
     current = current.next
     </pre>
 
@@ -239,13 +239,13 @@ while current is not null:
     <h4>Meaning</h4>
     <p>A stack is a last in first out container, used for nested or previous state tracking.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
-stack = empty stack
+stack = []
 for x in data:
-    while stack not empty and need to pop:
+    while stack and need_to_pop(stack, x):
         stack.pop()
-    stack.push(x)
+    stack.append(x)
     </pre>
 
     <h4>Usage</h4>
@@ -269,14 +269,16 @@ for x in data:
     <h4>Meaning</h4>
     <p>Queues process items in first in first out order, good for levels and time ordered events.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
-queue = empty queue
-enqueue(start)
-while queue not empty:
-    node = dequeue()
+from collections import deque
+
+queue = deque([start])
+while queue:
+    node = queue.popleft()
     process(node)
-    enqueue(neighbors)
+    for nei in neighbors(node):
+        queue.append(nei)
     </pre>
 
     <h4>Usage</h4>
@@ -300,16 +302,18 @@ while queue not empty:
     <h4>Meaning</h4>
     <p>Binary search cuts search space in half each step to find a target or threshold.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
 low = start
 high = end
 while low &lt;= high:
     mid = (low + high) // 2
-    if condition(mid) is true:
-        move one side
+    if condition(mid):
+        # move one side
+        high = mid - 1
     else:
-        move other side
+        # move other side
+        low = mid + 1
     </pre>
 
     <h4>Usage</h4>
@@ -333,11 +337,13 @@ while low &lt;= high:
     <h4>Meaning</h4>
     <p>Intervals represent ranges on a line, such as time or numeric segments.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
-sort(intervals by start)
-for current interval in intervals:
-    merge or start a new interval based on overlap
+intervals.sort(key=lambda x: x[0])
+merged = []
+for start, end in intervals:
+    # merge or start a new interval based on overlap
+    ...
     </pre>
 
     <h4>Usage</h4>
@@ -361,10 +367,10 @@ for current interval in intervals:
     <h4>Meaning</h4>
     <p>Binary trees have nodes with up to two children, forming hierarchical structures.</p>
 
-    <h4>Syntax (generic DFS)</h4>
+    <h4>Syntax (Python DFS)</h4>
     <pre>
 def dfs(node):
-    if node is null:
+    if node is None:
         return
     dfs(node.left)
     dfs(node.right)
@@ -391,13 +397,13 @@ def dfs(node):
     <h4>Meaning</h4>
     <p>A binary search tree keeps left subtree values smaller and right subtree values larger than the node.</p>
 
-    <h4>Syntax (generic search)</h4>
+    <h4>Syntax (Python search)</h4>
     <pre>
 node = root
-while node not null:
-    if target == node.value:
+while node is not None:
+    if target == node.val:
         return node
-    if target &lt; node.value:
+    if target &lt; node.val:
         node = node.left
     else:
         node = node.right
@@ -424,12 +430,12 @@ while node not null:
     <h4>Meaning</h4>
     <p>Graphs connect nodes by edges and model general relationships, not just hierarchies.</p>
 
-    <h4>Syntax (generic adjacency list DFS)</h4>
+    <h4>Syntax (Python adjacency list DFS)</h4>
     <pre>
 def dfs(node):
-    mark node as visited
+    visited.add(node)
     for neighbor in graph[node]:
-        if neighbor not visited:
+        if neighbor not in visited:
             dfs(neighbor)
     </pre>
 
@@ -454,17 +460,24 @@ def dfs(node):
     <h4>Meaning</h4>
     <p>Topological sort orders nodes in a directed acyclic graph so that every edge goes from earlier to later.</p>
 
-    <h4>Syntax (generic Kahn algorithm)</h4>
+    <h4>Syntax (Python - Kahn's algorithm)</h4>
     <pre>
-compute indegree for each node
-queue = nodes with indegree 0
-while queue not empty:
-    node = dequeue()
-    append node to order
-    for neighbor in neighbors:
+from collections import deque
+
+indegree = {node: 0 for node in graph}
+for node in graph:
+    for nei in graph[node]:
+        indegree[nei] += 1
+
+queue = deque([node for node in graph if indegree[node] == 0])
+order = []
+while queue:
+    node = queue.popleft()
+    order.append(node)
+    for neighbor in graph[node]:
         indegree[neighbor] -= 1
         if indegree[neighbor] == 0:
-            enqueue(neighbor)
+            queue.append(neighbor)
     </pre>
 
     <h4>Usage</h4>
@@ -489,7 +502,7 @@ while queue not empty:
     <h4>Meaning</h4>
     <p>Union find maintains disjoint sets and quickly answers whether two nodes are in the same component.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
 def find(x):
     if parent[x] != x:
@@ -524,13 +537,15 @@ def union(a, b):
     <h4>Meaning</h4>
     <p>Heaps keep track of the smallest or largest element efficiently.</p>
 
-    <h4>Syntax (generic min heap)</h4>
+    <h4>Syntax (Python min-heap)</h4>
     <pre>
-heap = empty min heap
+import heapq
+
+heap = []
 for x in data:
-    push x to heap
-    if size of heap &gt; k:
-        pop from heap
+    heapq.heappush(heap, x)
+    if len(heap) &gt; k:
+        heapq.heappop(heap)
     </pre>
 
     <h4>Usage</h4>
@@ -554,11 +569,12 @@ for x in data:
     <h4>Meaning</h4>
     <p>One dimensional DP stores best results for smaller subproblems in a single array.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
-dp[0] = base value
-for i from 1 to n:
-    dp[i] = best choice based on dp[0..i-1]
+dp = [0] * (n + 1)
+dp[0] = base_value
+for i in range(1, n + 1):
+    dp[i] = best_choice(dp, i)
     </pre>
 
     <h4>Usage</h4>
@@ -582,11 +598,11 @@ for i from 1 to n:
     <h4>Meaning</h4>
     <p>Two dimensional DP tables store states that depend on two indices, such as positions in two strings.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
-for i from 0 to n:
-    for j from 0 to m:
-        dp[i][j] = best based on neighbors
+for i in range(n + 1):
+    for j in range(m + 1):
+        dp[i][j] = best_from_neighbors(dp, i, j)
     </pre>
 
     <h4>Usage</h4>
@@ -610,10 +626,11 @@ for i from 0 to n:
     <h4>Meaning</h4>
     <p>DP optimization reduces memory or time by simplifying states or transitions.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
-for i from 1 to n:
-    new_state = compute from current_state
+current_state = initial_state
+for i in range(1, n + 1):
+    new_state = compute_from(current_state, i)
     current_state = new_state
     </pre>
 
@@ -638,14 +655,14 @@ for i from 1 to n:
     <h4>Meaning</h4>
     <p>Recursion is a function calling itself on smaller inputs until a base case is reached.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
 def solve(problem):
-    if base case:
-        return answer
+    if is_base_case(problem):
+        return base_answer(problem)
     smaller = transform(problem)
     partial = solve(smaller)
-    return build from partial
+    return build_from(partial)
     </pre>
 
     <h4>Usage</h4>
@@ -669,16 +686,16 @@ def solve(problem):
     <h4>Meaning</h4>
     <p>Backtracking explores all valid configurations by building partial answers and undoing bad choices.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
 def backtrack(path, choices):
-    if finished:
-        record path
+    if finished(path):
+        record(path)
         return
     for choice in choices:
-        choose
-        backtrack(path + choice, remaining choices)
-        unchoose
+        choose(path, choice)
+        backtrack(path + [choice], remaining_choices(choices, choice))
+        unchoose(path, choice)
     </pre>
 
     <h4>Usage</h4>
@@ -702,12 +719,13 @@ def backtrack(path, choices):
     <h4>Meaning</h4>
     <p>Greedy algorithms choose the best local option at each step hoping to build a global optimum.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
-sort(data by key)
+data.sort(key=key_func)
+result = []
 for x in data:
-    if taking x keeps solution valid:
-        take x
+    if is_valid_choice(result, x):
+        result.append(x)
     </pre>
 
     <h4>Usage</h4>
@@ -731,11 +749,11 @@ for x in data:
     <h4>Meaning</h4>
     <p>Bit manipulation works directly on the binary representation of numbers.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
-x &amp; 1        # lowest bit
-x &gt;&gt; 1       # shift right
-x ^ y        # xor bits
+x &amp; 1      # lowest bit
+x &gt;&gt; 1     # shift right
+x ^ y      # xor bits
     </pre>
 
     <h4>Usage</h4>
@@ -759,19 +777,25 @@ x ^ y        # xor bits
     <h4>Meaning</h4>
     <p>A trie is a tree data structure that stores strings by characters along paths from the root.</p>
 
-    <h4>Syntax (generic)</h4>
+    <h4>Syntax (Python)</h4>
     <pre>
 class TrieNode:
-    children = map from char to TrieNode
-    is_word = false
+    def __init__(self):
+        self.children = {}
+        self.is_word = False
 
-insert(word):
-    node = root
-    for c in word:
-        if c not in node.children:
-            node.children[c] = new TrieNode()
-        node = node.children[c]
-    node.is_word = true
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self, word: str) -&gt; None:
+        node = self.root
+        for c in word:
+            if c not in node.children:
+                node.children[c] = TrieNode()
+            node = node.children[c]
+        node.is_word = True
     </pre>
 
     <h4>Usage</h4>
