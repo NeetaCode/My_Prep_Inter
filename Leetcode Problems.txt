@@ -1,7 +1,792 @@
-1.	Arrays, Strings, Hash Tables
-2. Stacks Queues
-2.	Trees, Graphs (BFS, DFS, Dijkstra’s, A*)
-3.	Dynamic Programming
-4.	Recursion & Backtracking
-5.	Sliding Window, Two Pointers
-6. Bit Manipulation
+<div class="leetcode-topics">
+
+  <style>
+    .leetcode-topics details {
+      margin-bottom: 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: #fafafa;
+    }
+    .leetcode-topics summary {
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .leetcode-topics h4 {
+      margin-top: 6px;
+      margin-bottom: 4px;
+    }
+    .leetcode-topics pre {
+      background: #f0f0f0;
+      padding: 6px;
+      border-radius: 4px;
+      white-space: pre-wrap;
+    }
+    .leetcode-topics button {
+      margin-top: 6px;
+      padding: 2px 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+  </style>
+
+  <!-- 1. Arrays -->
+  <details>
+    <summary>1. Arrays - Traversal, prefix sum, in-place operations</summary>
+    <h4>Meaning</h4>
+    <p>Arrays store elements in a contiguous block of memory, accessed by index.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+for i from 0 to n - 1:
+    process(arr[i])
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Store and process ordered collections of numbers or values.</li>
+      <li>Use prefix sums to answer range sum queries quickly.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank">238. Product of Array Except Self</a></li>
+      <li><a href="https://leetcode.com/problems/find-the-highest-altitude/" target="_blank">1732. Find the Highest Altitude</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 2. Strings -->
+  <details>
+    <summary>2. Strings - Palindrome, substring, parsing</summary>
+    <h4>Meaning</h4>
+    <p>Strings represent sequences of characters, often processed like arrays with extra rules.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+for each character c in s:
+    process(c)
+
+substring = s[l : r]
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Manipulate and compare text, substrings, and patterns.</li>
+      <li>Check palindromes, reverse words, or compress characters.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/merge-strings-alternately/" target="_blank">1768. Merge Strings Alternately</a></li>
+      <li><a href="https://leetcode.com/problems/reverse-words-in-a-string/" target="_blank">151. Reverse Words in a String</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 3. Hashing -->
+  <details>
+    <summary>3. Hashing - Frequency map, deduplication, lookup</summary>
+    <h4>Meaning</h4>
+    <p>Hash maps and sets store key value pairs or unique items for fast lookup.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+freq = empty map
+for x in data:
+    freq[x] = freq.get(x, 0) + 1
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Count frequencies, detect duplicates, and build sets of seen values.</li>
+      <li>Optimize many brute force solutions from O(n²) to O(n).</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/find-the-difference-of-two-arrays/" target="_blank">2215. Find the Difference of Two Arrays</a></li>
+      <li><a href="https://leetcode.com/problems/unique-number-of-occurrences/" target="_blank">1207. Unique Number of Occurrences</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 4. Two Pointers -->
+  <details>
+    <summary>4. Two Pointers - Sorted arrays, pair problems</summary>
+    <h4>Meaning</h4>
+    <p>Two pointers move over an array or string to avoid nested loops.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+i = 0
+j = n - 1
+while i &lt; j:
+    process(i, j)
+    move i or j based on condition
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Solve pair sum, partition, and container problems in linear time.</li>
+      <li>Scan from both ends or with fast slow pointers.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/move-zeroes/" target="_blank">283. Move Zeroes</a></li>
+      <li><a href="https://leetcode.com/problems/container-with-most-water/" target="_blank">11. Container With Most Water</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 5. Sliding Window -->
+  <details>
+    <summary>5. Sliding Window - Fixed and variable windows</summary>
+    <h4>Meaning</h4>
+    <p>Sliding windows maintain a current subarray or substring while moving across data.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+left = 0
+for right from 0 to n - 1:
+    add data[right]
+    while window is invalid:
+        remove data[left]
+        left += 1
+    update answer
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Find maximum average, longest valid segment, or count within a window.</li>
+      <li>Replace O(n²) brute force over subarrays with O(n) scanning.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/maximum-average-subarray-i/" target="_blank">643. Maximum Average Subarray I</a></li>
+      <li><a href="https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/" target="_blank">1456. Maximum Number of Vowels in a Substring of Given Length</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 6. Sorting -->
+  <details>
+    <summary>6. Sorting - Custom sort and preprocess</summary>
+    <h4>Meaning</h4>
+    <p>Sorting arranges elements so that later logic becomes simpler.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+sort(data)
+for x in data:
+    process(x)
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Prepare for two pointer logic, binary search, or greedy intervals.</li>
+      <li>Group values and detect boundaries or thresholds.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/successful-pairs-of-spells-and-potions/" target="_blank">2300. Successful Pairs of Spells and Potions</a></li>
+      <li><a href="https://leetcode.com/problems/kth-largest-element-in-an-array/" target="_blank">215. Kth Largest Element in an Array</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 7. Linked Lists -->
+  <details>
+    <summary>7. Linked Lists - Reverse, cycle, merge</summary>
+    <h4>Meaning</h4>
+    <p>Linked lists are chains of nodes where each node points to the next.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+current = head
+while current is not null:
+    process(current.value)
+    current = current.next
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Model dynamic sequences with frequent insert and delete operations.</li>
+      <li>Reverse lists, find middle nodes, and rearrange nodes in place.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/reverse-linked-list/" target="_blank">206. Reverse Linked List</a></li>
+      <li><a href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/" target="_blank">2095. Delete the Middle Node of a Linked List</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 8. Stack -->
+  <details>
+    <summary>8. Stack - Monotonic stack, parentheses</summary>
+    <h4>Meaning</h4>
+    <p>A stack is a last in first out container, used for nested or previous state tracking.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+stack = empty stack
+for x in data:
+    while stack not empty and need to pop:
+        stack.pop()
+    stack.push(x)
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Validate parentheses, decode nested strings, and handle previous greater or smaller elements.</li>
+      <li>Implement monotonic stacks for next greater element style problems.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/removing-stars-from-a-string/" target="_blank">2390. Removing Stars From a String</a></li>
+      <li><a href="https://leetcode.com/problems/daily-temperatures/" target="_blank">739. Daily Temperatures</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 9. Queue / Deque -->
+  <details>
+    <summary>9. Queue or Deque - BFS, time windows</summary>
+    <h4>Meaning</h4>
+    <p>Queues process items in first in first out order, good for levels and time ordered events.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+queue = empty queue
+enqueue(start)
+while queue not empty:
+    node = dequeue()
+    process(node)
+    enqueue(neighbors)
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Run breadth first search on graphs or trees.</li>
+      <li>Maintain sliding time windows or active entities.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/number-of-recent-calls/" target="_blank">933. Number of Recent Calls</a></li>
+      <li><a href="https://leetcode.com/problems/dota2-senate/" target="_blank">649. Dota2 Senate</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 10. Binary Search -->
+  <details>
+    <summary>10. Binary Search - Index and answer space</summary>
+    <h4>Meaning</h4>
+    <p>Binary search cuts search space in half each step to find a target or threshold.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+low = start
+high = end
+while low &lt;= high:
+    mid = (low + high) // 2
+    if condition(mid) is true:
+        move one side
+    else:
+        move other side
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Search sorted arrays or lists for an element or boundary.</li>
+      <li>Binary search on the answer space when the check is monotonic.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/guess-number-higher-or-lower/" target="_blank">374. Guess Number Higher or Lower</a></li>
+      <li><a href="https://leetcode.com/problems/koko-eating-bananas/" target="_blank">875. Koko Eating Bananas</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 11. Intervals -->
+  <details>
+    <summary>11. Intervals - Merge, overlaps, scheduling</summary>
+    <h4>Meaning</h4>
+    <p>Intervals represent ranges on a line, such as time or numeric segments.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+sort(intervals by start)
+for current interval in intervals:
+    merge or start a new interval based on overlap
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Detect overlaps, merge ranges, and schedule tasks without conflicts.</li>
+      <li>Greedy strategies after sorting by start or end time.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/non-overlapping-intervals/" target="_blank">435. Non-overlapping Intervals</a></li>
+      <li><a href="https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/" target="_blank">452. Minimum Number of Arrows to Burst Balloons</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 12. Binary Trees -->
+  <details>
+    <summary>12. Binary Trees - DFS, BFS, height, paths</summary>
+    <h4>Meaning</h4>
+    <p>Binary trees have nodes with up to two children, forming hierarchical structures.</p>
+
+    <h4>Syntax (generic DFS)</h4>
+    <pre>
+def dfs(node):
+    if node is null:
+        return
+    dfs(node.left)
+    dfs(node.right)
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Compute depth, collect paths, and aggregate values down the tree.</li>
+      <li>Use DFS or BFS depending on whether depth or level order matters.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/" target="_blank">104. Maximum Depth of Binary Tree</a></li>
+      <li><a href="https://leetcode.com/problems/binary-tree-right-side-view/" target="_blank">199. Binary Tree Right Side View</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 13. BST -->
+  <details>
+    <summary>13. Binary Search Trees - Search, validate, LCA</summary>
+    <h4>Meaning</h4>
+    <p>A binary search tree keeps left subtree values smaller and right subtree values larger than the node.</p>
+
+    <h4>Syntax (generic search)</h4>
+    <pre>
+node = root
+while node not null:
+    if target == node.value:
+        return node
+    if target &lt; node.value:
+        node = node.left
+    else:
+        node = node.right
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Efficient search, insert, and delete in logarithmic time on average.</li>
+      <li>Use structure properties to implement range queries and lowest common ancestor.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/search-in-a-binary-search-tree/" target="_blank">700. Search in a Binary Search Tree</a></li>
+      <li><a href="https://leetcode.com/problems/delete-node-in-a-bst/" target="_blank">450. Delete Node in a BST</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 14. Graphs -->
+  <details>
+    <summary>14. Graphs - DFS, BFS, components</summary>
+    <h4>Meaning</h4>
+    <p>Graphs connect nodes by edges and model general relationships, not just hierarchies.</p>
+
+    <h4>Syntax (generic adjacency list DFS)</h4>
+    <pre>
+def dfs(node):
+    mark node as visited
+    for neighbor in graph[node]:
+        if neighbor not visited:
+            dfs(neighbor)
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Check connectivity, count components, and search for paths.</li>
+      <li>Model grids, rooms, provinces, and many real world networks.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/keys-and-rooms/" target="_blank">841. Keys and Rooms</a></li>
+      <li><a href="https://leetcode.com/problems/rotting-oranges/" target="_blank">994. Rotting Oranges</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 15. Topological Sort -->
+  <details>
+    <summary>15. Topological Sort - Dependency ordering</summary>
+    <h4>Meaning</h4>
+    <p>Topological sort orders nodes in a directed acyclic graph so that every edge goes from earlier to later.</p>
+
+    <h4>Syntax (generic Kahn algorithm)</h4>
+    <pre>
+compute indegree for each node
+queue = nodes with indegree 0
+while queue not empty:
+    node = dequeue()
+    append node to order
+    for neighbor in neighbors:
+        indegree[neighbor] -= 1
+        if indegree[neighbor] == 0:
+            enqueue(neighbor)
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Schedule tasks that have prerequisites and dependency constraints.</li>
+      <li>Detect cycles when no full ordering is possible.</li>
+    </ul>
+
+    <h4>Note on LeetCode 75</h4>
+    <p>Topological sort is an important graph pattern but it is not directly represented in the LeetCode 75 list. Classic problems to practice are:</p>
+    <ul>
+      <li><a href="https://leetcode.com/problems/course-schedule/" target="_blank">207. Course Schedule</a></li>
+      <li><a href="https://leetcode.com/problems/course-schedule-ii/" target="_blank">210. Course Schedule II</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 16. Union Find -->
+  <details>
+    <summary>16. Union Find - Connectivity and components</summary>
+    <h4>Meaning</h4>
+    <p>Union find maintains disjoint sets and quickly answers whether two nodes are in the same component.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+def find(x):
+    if parent[x] != x:
+        parent[x] = find(parent[x])
+    return parent[x]
+
+def union(a, b):
+    rootA = find(a)
+    rootB = find(b)
+    if rootA != rootB:
+        parent[rootB] = rootA
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Count connected components in graphs.</li>
+      <li>Evaluate connectivity after unions for equations or relations.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/number-of-provinces/" target="_blank">547. Number of Provinces</a></li>
+      <li><a href="https://leetcode.com/problems/evaluate-division/" target="_blank">399. Evaluate Division</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 17. Heap / Priority Queue -->
+  <details>
+    <summary>17. Heap or Priority Queue - Top K and scheduling</summary>
+    <h4>Meaning</h4>
+    <p>Heaps keep track of the smallest or largest element efficiently.</p>
+
+    <h4>Syntax (generic min heap)</h4>
+    <pre>
+heap = empty min heap
+for x in data:
+    push x to heap
+    if size of heap &gt; k:
+        pop from heap
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Find the k-th largest or smallest elements in a stream.</li>
+      <li>Pick next best candidate when several priorities compete.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/kth-largest-element-in-an-array/" target="_blank">215. Kth Largest Element in an Array</a></li>
+      <li><a href="https://leetcode.com/problems/total-cost-to-hire-k-workers/" target="_blank">2462. Total Cost to Hire K Workers</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 18. 1-D DP -->
+  <details>
+    <summary>18. 1-D Dynamic Programming - Optimization and recurrence</summary>
+    <h4>Meaning</h4>
+    <p>One dimensional DP stores best results for smaller subproblems in a single array.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+dp[0] = base value
+for i from 1 to n:
+    dp[i] = best choice based on dp[0..i-1]
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Solve problems like climbing steps or maximizing profit along a line.</li>
+      <li>Replace exponential recursion with linear iteration and memory.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/n-th-tribonacci-number/" target="_blank">1137. N-th Tribonacci Number</a></li>
+      <li><a href="https://leetcode.com/problems/house-robber/" target="_blank">198. House Robber</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 19. 2-D DP -->
+  <details>
+    <summary>19. 2-D Dynamic Programming - Grid and string DP</summary>
+    <h4>Meaning</h4>
+    <p>Two dimensional DP tables store states that depend on two indices, such as positions in two strings.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+for i from 0 to n:
+    for j from 0 to m:
+        dp[i][j] = best based on neighbors
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Count paths in grids and align or transform strings.</li>
+      <li>Use overlapping subproblems across two dimensions.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/unique-paths/" target="_blank">62. Unique Paths</a></li>
+      <li><a href="https://leetcode.com/problems/longest-common-subsequence/" target="_blank">1143. Longest Common Subsequence</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 20. DP Optimization -->
+  <details>
+    <summary>20. DP Optimization - State compression and transitions</summary>
+    <h4>Meaning</h4>
+    <p>DP optimization reduces memory or time by simplifying states or transitions.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+for i from 1 to n:
+    new_state = compute from current_state
+    current_state = new_state
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Compress 2-D tables into 1-D arrays when only previous row or column matters.</li>
+      <li>Track limited states such as holding or not holding a stock for trading problems.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/" target="_blank">714. Best Time to Buy and Sell Stock with Transaction Fee</a></li>
+      <li><a href="https://leetcode.com/problems/edit-distance/" target="_blank">72. Edit Distance</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 21. Recursion -->
+  <details>
+    <summary>21. Recursion - Call stack logic</summary>
+    <h4>Meaning</h4>
+    <p>Recursion is a function calling itself on smaller inputs until a base case is reached.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+def solve(problem):
+    if base case:
+        return answer
+    smaller = transform(problem)
+    partial = solve(smaller)
+    return build from partial
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Express solutions that naturally break into smaller similar subproblems.</li>
+      <li>Implement tree traversals, backtracking, and divide and conquer.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/reverse-linked-list/" target="_blank">206. Reverse Linked List</a> (recursive option)</li>
+      <li><a href="https://leetcode.com/problems/decode-string/" target="_blank">394. Decode String</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 22. Backtracking -->
+  <details>
+    <summary>22. Backtracking - Subsets and permutations</summary>
+    <h4>Meaning</h4>
+    <p>Backtracking explores all valid configurations by building partial answers and undoing bad choices.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+def backtrack(path, choices):
+    if finished:
+        record path
+        return
+    for choice in choices:
+        choose
+        backtrack(path + choice, remaining choices)
+        unchoose
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Generate combinations, permutations, and constrained selections.</li>
+      <li>Search over all possibilities with pruning when constraints fail.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank">17. Letter Combinations of a Phone Number</a></li>
+      <li><a href="https://leetcode.com/problems/combination-sum-iii/" target="_blank">216. Combination Sum III</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 23. Greedy -->
+  <details>
+    <summary>23. Greedy - Local choice to reach global goal</summary>
+    <h4>Meaning</h4>
+    <p>Greedy algorithms choose the best local option at each step hoping to build a global optimum.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+sort(data by key)
+for x in data:
+    if taking x keeps solution valid:
+        take x
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Schedule tasks, pick intervals, or maintain running bests without backtracking.</li>
+      <li>Works when problem has an exchange argument or matroid like structure.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/" target="_blank">1431. Kids With the Greatest Number of Candies</a></li>
+      <li><a href="https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/" target="_blank">452. Minimum Number of Arrows to Burst Balloons</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 24. Bit Manipulation -->
+  <details>
+    <summary>24. Bit Manipulation - Masking and XOR tricks</summary>
+    <h4>Meaning</h4>
+    <p>Bit manipulation works directly on the binary representation of numbers.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+x &amp; 1        # lowest bit
+x &gt;&gt; 1       # shift right
+x ^ y        # xor bits
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Count bits, toggle bits, or compute parity and uniqueness.</li>
+      <li>Optimize state encoding or dynamic programming over bitmasks.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/counting-bits/" target="_blank">338. Counting Bits</a></li>
+      <li><a href="https://leetcode.com/problems/single-number/" target="_blank">136. Single Number</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+  <!-- 25. Trie -->
+  <details>
+    <summary>25. Trie - Prefix search</summary>
+    <h4>Meaning</h4>
+    <p>A trie is a tree data structure that stores strings by characters along paths from the root.</p>
+
+    <h4>Syntax (generic)</h4>
+    <pre>
+class TrieNode:
+    children = map from char to TrieNode
+    is_word = false
+
+insert(word):
+    node = root
+    for c in word:
+        if c not in node.children:
+            node.children[c] = new TrieNode()
+        node = node.children[c]
+    node.is_word = true
+    </pre>
+
+    <h4>Usage</h4>
+    <ul>
+      <li>Implement fast prefix searches and autocomplete suggestions.</li>
+      <li>Store dictionaries of words and support incremental search.</li>
+    </ul>
+
+    <h4>LeetCode 75 examples</h4>
+    <ul>
+      <li><a href="https://leetcode.com/problems/implement-trie-prefix-tree/" target="_blank">208. Implement Trie (Prefix Tree)</a></li>
+      <li><a href="https://leetcode.com/problems/search-suggestions-system/" target="_blank">1268. Search Suggestions System</a></li>
+    </ul>
+
+    <button onclick="this.closest('details').open=false;">Hide</button>
+  </details>
+
+</div>
