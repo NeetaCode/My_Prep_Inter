@@ -1,4 +1,5 @@
 1.	Arrays, Strings, Hash Tables
+2. Stacks Queues
 2.	Trees, Graphs (BFS, DFS, Dijkstra’s, A*)
 3.	Dynamic Programming
 4.	Recursion & Backtracking
