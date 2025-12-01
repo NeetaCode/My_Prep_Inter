@@ -28,7 +28,23 @@
       font-size: 12px;
       cursor: pointer;
     }
+    .leetcode-topics .controls {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      margin-bottom: 8px;
+    }
   </style>
+
+  <!-- Global controls -->
+  <div class="controls">
+    <button onclick="document.querySelectorAll('.leetcode-topics details').forEach(function(d){ d.open = true; });">
+      Show all
+    </button>
+    <button onclick="document.querySelectorAll('.leetcode-topics details').forEach(function(d){ d.open = false; });">
+      Hide all
+    </button>
+  </div>
 
   <!-- 1. Arrays -->
   <details>
